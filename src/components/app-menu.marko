@@ -1,13 +1,25 @@
-<use-machine/[machine, send]/>
+import * as menu from "@zag-js/menu";
+
+<const/machine=(
+  () =>
+    menu.machine({
+      id: String(Math.ceil(Math.random() * 1e10)),
+      "aria-label": "File",
+    })
+)/>
+<use-machine/[machineState, send, service] machine=machine/>
 <!-- <pre>${JSON.stringify(machine, null, 2)}</pre> -->
 <!-- </use-machine> -->
+
+<const/api=menu.connect(state, send, normalizeProps)/>
+
 <const/onClick=(
   () => {
-    send();
+    // send("");
   }
 )/>
 <button onClick=onClick>
   Click
 </button>
-<span>${machine.state}</span>
+<span>${machineState}</span>
 <span>Menu</span>

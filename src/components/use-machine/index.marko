@@ -1,0 +1,28 @@
+import type { MachineSrc } from "@zag-js/core";
+import type { HookOptions } from "../use-service/types";
+export interface Input {
+  machine: MachineSrc<any, any, any>;
+  options?: HookOptions<any, any, any>;
+}
+
+<use-service/service machine=input.machine options=input.options/>
+
+<let/machineState=service.getState()/>
+
+<let/unsubscribe=(
+  () => {
+    //
+  }
+)/>
+
+<lifecycle
+  onMount() {
+    unsubscribe = service.subscribe((nextState) => {
+      // reconcile???;
+      machineState = nextState;
+    });
+  }
+  onDestroy() { unsubscribe(); }
+/>
+
+<return=([machineState, service.send, service] as const)/>
