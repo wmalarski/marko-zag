@@ -13,9 +13,9 @@
   }
 )/>
 
-<const/machine=[{ state: 1 }, send]/>
+<const/machine=([{ state: 1 }, send] as const)/>
 
-<return="hello"/>
+<return=machine/>
 <!-- <${input.renderBody}/> -->
 // type HookOptions<
 

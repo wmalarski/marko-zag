@@ -1,0 +1,34 @@
+import type { MachineSrc, StateMachine as S } from "@zag-js/core";
+import type { HookOptions } from "./types";
+export interface Input {
+  machine: MachineSrc<any, any, any>;
+  options?: HookOptions<any, any, any>;
+}
+
+<const/{ actions, state: hydratedState, context }=(input.options ?? {})/>
+
+<const/service=(() => {
+  const _machine =
+    typeof input.machine === "function" ? input.machine() : input.machine;
+  const contextValue = typeof context === "function" ? context() : context;
+  return contextValue ? _machine.withContext(contextValue) : _machine;
+})()/>
+
+<lifecycle
+  onMount() {
+    service.start(hydratedState);
+    if (service.state.can("SETUP")) {
+      service.send("SETUP");
+    }
+  }
+  onDestroy() { service.stop(); }
+/>
+
+<effect() {
+  const contextValue = typeof context === "function" ? context() : context;
+  service.setContext(contextValue);
+}/>
+
+<effect() { service.setOptions({ actions }); }/>
+
+<return=service/>
