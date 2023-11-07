@@ -7,10 +7,10 @@
     "@marko/tags-api-preview": "^0.7.2",
     "@zag-js/menu": "^0.27.1",
     "hyphenate-style-name": "^1.0.4",
-    "marko": "^5.31.0"
+    "marko": "^5.31.14"
   },
   "devDependencies": {
-    "@marko/run": "^0.2.0"
+    "@marko/run": "^0.2.15"
   },
   "private": true,
   "scripts": {

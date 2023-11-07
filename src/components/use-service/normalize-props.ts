@@ -1,6 +1,5 @@
 import { createNormalizer } from "@zag-js/types";
 import { isObject, isString } from "@zag-js/utils";
-import type { JSX } from "solid-js";
 import { cssify } from "./cssify";
 
 export type PropTypes = JSX.IntrinsicElements & {
