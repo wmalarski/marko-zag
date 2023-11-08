@@ -7,28 +7,69 @@ export interface Input {
 
 <const/{ actions, state: hydratedState, context }=(input.options ?? {})/>
 
+<!-- <effect() {
+  console.log("use-service-effect1", {
+    actions,
+    hydratedState,
+    context,
+    machine: input.machine,
+    options: input.options,
+  });
+}/> -->
+
 <const/service=(() => {
   const _machine =
     typeof input.machine === "function" ? input.machine() : input.machine;
   const contextValue = typeof context === "function" ? context() : context;
-  return contextValue ? _machine.withContext(contextValue) : _machine;
+  const result = contextValue ? _machine.withContext(contextValue) : _machine;
+
+  // console.log("use-service-const/service", {
+  //   _machine,
+  //   contextValue,
+  //   result,
+  // });
+
+  return result;
 })()/>
 
 <lifecycle
   onMount() {
+    // console.log("use-service-onMount", {
+    //   service,
+    //   hydratedState,
+    // });
     service.start(hydratedState);
     if (service.state.can("SETUP")) {
       service.send("SETUP");
     }
   }
-  onDestroy() { service.stop(); }
+  onDestroy() {
+    // console.log("use-service-onDestroy", {
+    //   service,
+    // });
+    service.stop();
+  }
 />
 
 <effect() {
   const contextValue = typeof context === "function" ? context() : context;
   service.setContext(contextValue);
+  // console.log("use-service-effect2", {
+  //   service,
+  //   contextValue,
+  // });
 }/>
 
-<effect() { service.setOptions({ actions }); }/>
+<effect() {
+  //   console.log("use-service-effect3-pre", {
+  //   service,
+  //   actions,
+  // });
+  service.setOptions({ actions });
+  // console.log("use-service-effect3-post", {
+  //   service,
+  //   actions,
+  // });
+}/>
 
 <return=service/>

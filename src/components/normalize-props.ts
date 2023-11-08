@@ -2,12 +2,12 @@ import { createNormalizer } from "@zag-js/types";
 import { isObject, isString } from "@zag-js/utils";
 import { cssify } from "./cssify";
 
-export type PropTypes = JSX.IntrinsicElements & {
-  element: JSX.HTMLAttributes<any>;
-  style: JSX.CSSProperties;
+export type PropTypes = Marko.NativeTags & {
+  element: Marko.Input<any>;
+  style: Marko.Input<any>["style"];
 };
 
-const eventMap = {
+const eventMap: Record<string, string> = {
   onFocus: "onFocusIn",
   onBlur: "onFocusOut",
   onDoubleClick: "onDblClick",
@@ -18,7 +18,7 @@ const eventMap = {
   className: "class",
 };
 
-function toSolidProp(prop: string) {
+function toMarkoProp(prop: string) {
   return prop in eventMap ? eventMap[prop] : prop;
 }
 
@@ -42,7 +42,7 @@ export const normalizeProps = createNormalizer<PropTypes>((props: Dict) => {
       continue;
     }
 
-    normalized[toSolidProp(key)] = value;
+    normalized[toMarkoProp(key)] = value;
   }
   return normalized;
 });
