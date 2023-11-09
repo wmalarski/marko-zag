@@ -1,16 +1,19 @@
 import * as menu from "@zag-js/menu";
 import { normalizeProps } from "./normalize-props";
 
-<const/machine=(
-  () =>
-    menu.machine({
+<let/machine=(
+  () => {
+    const machine = menu.machine({
       id: String(Math.ceil(Math.random() * 1e10)),
       "aria-label": "File",
-    })
+    });
+    // console.log("machine", { machine });
+    return machine;
+  }
 )/>
 <use-machine/[machineState, send, service] machine=machine/>
 
-<const/api=menu.connect(machineState, send, normalizeProps)/>
+<let/api=menu.connect(machineState, send, normalizeProps)/>
 
 <effect() {
   console.log("app-menu", {

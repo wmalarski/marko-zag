@@ -1,8 +1,8 @@
 import type { MachineSrc } from "@zag-js/core";
-import type { HookOptions } from "../use-service/types";
-export interface Input {
-  machine: MachineSrc<any, any, any>;
-  options?: HookOptions<any, any, any>;
+import type { HookOptions, RSA, SSS, SEO, SAEO } from "../use-service/types";
+export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
+  machine: MachineSrc<TC, TS, TE>;
+  options?: HookOptions<TC, TS, TE>;
 }
 
 <use-service/service machine=input.machine options=input.options/>

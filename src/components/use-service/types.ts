@@ -5,9 +5,19 @@ export type HookOptions<
   TState extends S.StateSchema,
   TEvent extends S.EventObject = S.AnyEventObject,
 > = Omit<S.HookOptions<TContext, TState, TEvent>, "context"> & {
-  // context?: Store<Partial<TContext>> | Accessor<Partial<TContext>>;
-  context?: any;
+  context?: Partial<TContext>;
 };
+
+export type RSA = Record<string, any>;
+export type SSS = S.StateSchema;
+export type SEO = S.EventObject;
+export type SAEO = S.AnyEventObject;
+
+// ,
+// > {
+//   machine: MachineSrc<TContext, TState, TEvent>;
+//   options?: HookOptions<TContext, TState, TEvent>;
+// }
 
 export interface UseServiceInput<
   TContext extends Record<string, any>,

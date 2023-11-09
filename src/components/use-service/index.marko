@@ -1,12 +1,11 @@
 import type { MachineSrc } from "@zag-js/core";
-import type { HookOptions } from "./types";
-export interface Input {
-  machine: MachineSrc<any, any, any>;
-  options?: HookOptions<any, any, any>;
+import type { HookOptions, RSA, SSS, SEO, SAEO } from "./types";
+export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
+  machine: MachineSrc<TC, TS, TE>;
+  options?: HookOptions<TC, TS, TE>;
 }
 
 <const/{ actions, state: hydratedState, context }=(input.options ?? {})/>
-
 <!-- <effect() {
   console.log("use-service-effect1", {
     actions,
@@ -17,43 +16,51 @@ export interface Input {
   });
 }/> -->
 
-<const/service=(() => {
+<let/service=(() => {
   const _machine =
     typeof input.machine === "function" ? input.machine() : input.machine;
-  const contextValue = typeof context === "function" ? context() : context;
-  const result = contextValue ? _machine.withContext(contextValue) : _machine;
+  const result = context ? _machine.withContext(context) : _machine;
 
-  // console.log("use-service-const/service", {
-  //   _machine,
-  //   contextValue,
-  //   result,
-  // });
+  console.log("use-service-const/service", {
+    _machine,
+    context,
+    service: result,
+  });
 
   return result;
 })()/>
 
-<lifecycle
+<effect() {
+  service.start(hydratedState);
+  if (service.state.can("SETUP")) {
+    service.send("SETUP");
+  }
+  return () => {
+    service.stop();
+  };
+}/>
+<!-- <lifecycle
   onMount() {
     // console.log("use-service-onMount", {
     //   service,
     //   hydratedState,
     // });
-    service.start(hydratedState);
-    if (service.state.can("SETUP")) {
-      service.send("SETUP");
-    }
+    // service.start(hydratedState);
+    // if (service.state.can("SETUP")) {
+    //   service.send("SETUP");
+    // }
   }
   onDestroy() {
     // console.log("use-service-onDestroy", {
     //   service,
     // });
-    service.stop();
+    // service.stop();
   }
-/>
+/> -->
 
 <effect() {
-  const contextValue = typeof context === "function" ? context() : context;
-  service.setContext(contextValue);
+  // const contextValue = typeof context === "function" ? context() : context;
+  service.setContext(context);
   // console.log("use-service-effect2", {
   //   service,
   //   contextValue,
