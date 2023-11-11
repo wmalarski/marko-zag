@@ -1,5 +1,5 @@
 import * as menu from "@zag-js/menu";
-import { normalizeProps } from "./normalize-props";
+import { normalizeProps } from "../normalize-props";
 
 <const/machine=(
   () =>
@@ -9,26 +9,16 @@ import { normalizeProps } from "./normalize-props";
     })
 )/>
 
-<use-machine/[machineState, send, service] machine=machine/>
+<use-machine/[machineState, send] machine=machine/>
 <const/api=menu.connect(machineState, send, normalizeProps)/>
 
-<effect() {
-  console.log("app-menu", {
-    machine,
-    machineState,
-    send,
-    service,
-    api,
-  });
-}/>
-
 <div>
-  <button ...api.triggerProps>
+  <app-button ...api.triggerProps>
     Actions
     <span aria-hidden="true">
       ▾
     </span>
-  </button>
+  </app-button>
   <div ...api.positionerProps>
     <ul ...api.contentProps>
       <li ...api.getItemProps({ id: "edit" })>
