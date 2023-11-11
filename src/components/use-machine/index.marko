@@ -12,7 +12,7 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
 <effect() {
   const unsubscribe = service().subscribe((nextState) => {
     // reconcile???;
-    console.log({ nextState });
+    // console.log({ nextState });
     machineState = nextState;
   });
   return () => {

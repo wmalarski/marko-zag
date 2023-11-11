@@ -1,38 +1,36 @@
 import * as menu from "@zag-js/menu";
 import { normalizeProps } from "../normalize-props";
-
-<const/machine=(
-  () =>
-    menu.machine({
-      id: String(Math.ceil(Math.random() * 1e10)),
-      "aria-label": "File",
-    })
-)/>
+import type { ButtonClassProps } from "../app-button/recipes";
+import { twCx } from "../../utils/twCva";
+export type Input = (menu.Context & {
+  trigger: Marko.AttrTag<Marko.Input<"button"> & ButtonClassProps>;
+  items: Marko.RepeatableAttrTag<Marko.Input<"li"> & menu.ItemProps>;
+}
+);
+<const/machine=(() => menu.machine(input))/>
 
 <use-machine/[machineState, send] machine=machine/>
 <const/api=menu.connect(machineState, send, normalizeProps)/>
 
 <div>
-  <app-button ...api.triggerProps>
-    Actions
-    <span aria-hidden="true">
-      ▾
-    </span>
+  <app-button ...api.triggerProps ...input.trigger>
+    <${input.trigger.renderBody}/>
   </app-button>
   <div ...api.positionerProps>
-    <ul ...api.contentProps>
-      <li ...api.getItemProps({ id: "edit" })>
-        Edit
-      </li>
-      <li ...api.getItemProps({ id: "duplicate" })>
-        Duplicate
-      </li>
-      <li ...api.getItemProps({ id: "delete" })>
-        Delete
-      </li>
-      <li ...api.getItemProps({ id: "export" })>
-        Export...
-      </li>
+    <ul
+      class="pointer-events-auto w-60 p-2 isolate list-none shadow-md bg-base-200"
+      ...api.contentProps
+    >
+      <for|item| of=input.items>
+        <const/{ id, closeOnSelect, disabled, valueText, class: className, ...rest }=item/>
+        <li 
+          ...api.getItemProps({ id, closeOnSelect, disabled, valueText }) 
+          class=twCx("py-1 px-2 cursor-pointer", className) 
+          ...rest
+        >
+          <${item.renderBody}/>
+        </li>
+      </for>
     </ul>
   </div>
 </div>
