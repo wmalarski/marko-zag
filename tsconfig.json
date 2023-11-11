@@ -5,7 +5,13 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "lib": ["es2018", "dom"]
+    "lib": [
+      "esnext",
+      "dom"
+    ]
   },
-  "include": ["src/**/*", ".marko-run/**/*"]
+  "include": [
+    "src/**/*",
+    ".marko-run/**/*"
+  ]
 }
