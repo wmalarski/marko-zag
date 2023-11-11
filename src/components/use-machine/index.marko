@@ -7,7 +7,7 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
 
 <use-service/service machine=input.machine options=input.options/>
 
-<let/machineState=service.getState()/>
+<let/machineState=service().getState()/>
 
 <let/unsubscribe=(
   () => {
@@ -22,7 +22,7 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
     //   machine: input.machine,
     //   options: input.options,
     // });
-    unsubscribe = service.subscribe((nextState) => {
+    unsubscribe = service().subscribe((nextState) => {
       // reconcile???;
 
       // console.log("use-machine-subscribe", {
@@ -41,4 +41,4 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
   }
 />
 
-<return=([machineState, service.send, service] as const)/>
+<return=([machineState, service().send, service] as const)/>

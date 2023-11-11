@@ -6,15 +6,6 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
 }
 
 <const/{ actions, state: hydratedState, context }=(input.options ?? {})/>
-<!-- <effect() {
-  console.log("use-service-effect1", {
-    actions,
-    hydratedState,
-    context,
-    machine: input.machine,
-    options: input.options,
-  });
-}/> -->
 
 <let/service=(() => {
   const _machine =
@@ -27,40 +18,23 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
     service: result,
   });
 
-  return result;
+  return () => result;
 })()/>
 
-<effect() {
-  service.start(hydratedState);
-  if (service.state.can("SETUP")) {
-    service.send("SETUP");
-  }
-  return () => {
-    service.stop();
-  };
-}/>
-<!-- <lifecycle
+<lifecycle
   onMount() {
-    // console.log("use-service-onMount", {
-    //   service,
-    //   hydratedState,
-    // });
-    // service.start(hydratedState);
-    // if (service.state.can("SETUP")) {
-    //   service.send("SETUP");
-    // }
+    const serviceInstance = service();
+    serviceInstance.start(hydratedState);
+    if (serviceInstance.state.can("SETUP")) {
+      serviceInstance.send("SETUP");
+    }
   }
-  onDestroy() {
-    // console.log("use-service-onDestroy", {
-    //   service,
-    // });
-    // service.stop();
-  }
-/> -->
+  onDestroy() { service().stop(); }
+/>
 
 <effect() {
   // const contextValue = typeof context === "function" ? context() : context;
-  service.setContext(context);
+  service().setContext(context);
   // console.log("use-service-effect2", {
   //   service,
   //   contextValue,
@@ -72,7 +46,7 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
   //   service,
   //   actions,
   // });
-  service.setOptions({ actions });
+  service().setOptions({ actions });
   // console.log("use-service-effect3-post", {
   //   service,
   //   actions,
