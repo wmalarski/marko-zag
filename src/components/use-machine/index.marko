@@ -9,36 +9,15 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
 
 <let/machineState=service().getState()/>
 
-<let/unsubscribe=(
-  () => {
-    //
-  }
-)/>
-
-<lifecycle
-  onMount() {
-    // console.log("use-machine-onMount", {
-    //   service,
-    //   machine: input.machine,
-    //   options: input.options,
-    // });
-    unsubscribe = service().subscribe((nextState) => {
-      // reconcile???;
-
-      // console.log("use-machine-subscribe", {
-      //   machineState,
-      //   nextState,
-      // });
-
-      machineState = nextState;
-    });
-  }
-  onDestroy() {
-    // console.log("use-machine-onDestroy", {
-    //   unsubscribe,
-    // });
+<effect() {
+  const unsubscribe = service().subscribe((nextState) => {
+    // reconcile???;
+    console.log({ nextState });
+    machineState = nextState;
+  });
+  return () => {
     unsubscribe();
-  }
-/>
+  };
+}/>
 
 <return=([machineState, service().send, service] as const)/>

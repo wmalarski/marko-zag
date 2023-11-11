@@ -1,19 +1,16 @@
 import * as menu from "@zag-js/menu";
 import { normalizeProps } from "./normalize-props";
 
-<let/machine=(
-  () => {
-    const machine = menu.machine({
+<const/machine=(
+  () =>
+    menu.machine({
       id: String(Math.ceil(Math.random() * 1e10)),
       "aria-label": "File",
-    });
-    // console.log("machine", { machine });
-    return machine;
-  }
+    })
 )/>
-<use-machine/[machineState, send, service] machine=machine/>
 
-<let/api=menu.connect(machineState, send, normalizeProps)/>
+<use-machine/[machineState, send, service] machine=machine/>
+<const/api=menu.connect(machineState, send, normalizeProps)/>
 
 <effect() {
   console.log("app-menu", {
@@ -25,42 +22,7 @@ import { normalizeProps } from "./normalize-props";
   });
 }/>
 
-<let/proxyTest=(() => {
-  const state = new Proxy(
-    { eyeCount: 4 },
-    {
-      set(obj, prop, value) {
-        if (prop === "eyeCount" && value % 2 !== 0) {
-          console.log("Monsters must have an even number of eyes");
-          return true;
-        } else {
-          return Reflect.set(obj, prop, value);
-        }
-      },
-    }
-  );
-  return { state };
-})()/>
-
-<let/proxyTest2=(() => {
-  const state = new Proxy({ eyeCount: 4 }, {});
-  return { state };
-})()/>
-
 <div>
-  <button onClick() { proxyTest2.state.eyeCount = 1; }>
-    Set 1
-  </button>
-  <button onClick() { proxyTest2.state.eyeCount = 2; }>
-    Set 2
-  </button>
-  <button onClick() {
-    const proxyTest3 = { state: new Proxy({ eyeCount: 4 }, {}) };
-    proxyTest3.state.eyeCount = 2;
-  }>
-    Set 3
-  </button>
-
   <button ...api.triggerProps>
     Actions
     <span aria-hidden="true">
@@ -84,7 +46,3 @@ import { normalizeProps } from "./normalize-props";
     </ul>
   </div>
 </div>
-<!-- <let/name="Adam"/>
-<button onClick() { name="John" }>
-  ${name}
-</button> -->
