@@ -5,6 +5,7 @@
   "type": "module",
   "dependencies": {
     "@marko/tags-api-preview": "^0.7.2",
+    "@zag-js/accordion": "^0.29.0",
     "@zag-js/menu": "^0.27.1",
     "class-variance-authority": "^0.7.0",
     "hyphenate-style-name": "^1.0.4",

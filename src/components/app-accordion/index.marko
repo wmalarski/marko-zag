@@ -1,0 +1,31 @@
+import * as accordion from "@zag-js/accordion"
+import { normalizeProps } from "../normalize-props";
+import type { ButtonClassProps } from "../app-button/recipes";
+import { twCx } from "../../utils/twCva";
+export type Input = (accordion.Context & {
+  items: Marko.RepeatableAttrTag<Marko.Input<"div"> & accordion.ItemProps & {
+    trigger: Marko.AttrTag<Marko.Input<"button">>;
+    content: Marko.AttrTag<Marko.Input<"div">>;
+  }>;
+}
+);
+<const/machine=(() => accordion.machine({id: "aa"}))/>
+
+<use-machine/[machineState, send] machine=(machine as any)/>
+<const/api=accordion.connect(machineState as any, send, normalizeProps)/>
+
+<div ...api.rootProps>
+  <for|item| of=input.items>
+    <const/{value, disabled, trigger, content, ...rest }=item/>
+    <div ...api.getItemProps({ value, disabled }) ...rest>
+      <h3>
+        <button ...api.getItemTriggerProps({ value, disabled }) ...item.trigger>
+          <${item.trigger.renderBody}/>
+        </button>
+      </h3>
+      <div ...api.getItemContentProps({ value, disabled }) ...item.content>
+        <${item.content.renderBody}/>
+      </div>
+    </div>
+  </for>
+</div>

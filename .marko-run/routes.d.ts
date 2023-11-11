@@ -11,6 +11,7 @@ declare module "@marko/run" {
 	interface AppData extends Run.DefineApp<{
 		routes: {
 			"/": Routes["/_index"];
+			"/accordion": Routes["/accordion"];
 			"/menu": Routes["/menu"];
 		}
 	}> {}
@@ -20,6 +21,16 @@ declare module "../src/routes/_index/+page.marko" {
   namespace MarkoRun {
     export { NotHandled, NotMatched, GetPaths, PostPaths, GetablePath, GetableHref, PostablePath, PostableHref, Platform };
     export type Route = Run.Routes["/"];
+    export type Context = Run.MultiRouteContext<Route> & Marko.Global;
+    export type Handler = Run.HandlerLike<Route>;
+    export const route: Run.HandlerTypeFn<Route>;
+  }
+}
+
+declare module "../src/routes/accordion/+page.marko" {
+  namespace MarkoRun {
+    export { NotHandled, NotMatched, GetPaths, PostPaths, GetablePath, GetableHref, PostablePath, PostableHref, Platform };
+    export type Route = Run.Routes["/accordion"];
     export type Context = Run.MultiRouteContext<Route> & Marko.Global;
     export type Handler = Run.HandlerLike<Route>;
     export const route: Run.HandlerTypeFn<Route>;
@@ -42,7 +53,7 @@ declare module "../src/routes/+layout.marko" {
   }
   namespace MarkoRun {
     export { NotHandled, NotMatched, GetPaths, PostPaths, GetablePath, GetableHref, PostablePath, PostableHref, Platform };
-    export type Route = Run.Routes["/" | "/menu"];
+    export type Route = Run.Routes["/" | "/accordion" | "/menu"];
     export type Context = Run.MultiRouteContext<Route> & Marko.Global;
     export type Handler = Run.HandlerLike<Route>;
     export const route: Run.HandlerTypeFn<Route>;
@@ -51,5 +62,6 @@ declare module "../src/routes/+layout.marko" {
 
 type Routes = {
 	"/_index": { verb: "get"; meta: typeof import("../src/routes/_index/+meta.json"); };
+	"/accordion": { verb: "get"; };
 	"/menu": { verb: "get"; };
 }
