@@ -3,4 +3,15 @@
 <app-checkbox/api id="checkbox">
   Input
 </app-checkbox>
-<span>Input is ${api.isChecked ? "checked" : "unchecked"} </span>
+
+<pre>${JSON.stringify(
+  {
+    checkedState: api.checkedState,
+    isChecked: api.isChecked,
+    isDisabled: api.isDisabled,
+    isFocused: api.isFocused,
+    isIndeterminate: api.isIndeterminate,
+  },
+  null,
+  2
+)}</pre>
