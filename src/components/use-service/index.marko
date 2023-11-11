@@ -7,50 +7,26 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
 
 <const/{ actions, state: hydratedState, context }=(input.options ?? {})/>
 
-<let/service=(() => {
+<const/service=(() => {
   const _machine =
     typeof input.machine === "function" ? input.machine() : input.machine;
   const result = context ? _machine.withContext(context) : _machine;
-
-  console.log("use-service-const/service", {
-    _machine,
-    context,
-    service: result,
-  });
-
   return () => result;
 })()/>
 
 <lifecycle
   onMount() {
-    const serviceInstance = service();
-    serviceInstance.start(hydratedState);
-    if (serviceInstance.state.can("SETUP")) {
-      serviceInstance.send("SETUP");
+    const instance = service();
+    instance.start(hydratedState);
+    if (instance.state.can("SETUP")) {
+      instance.send("SETUP");
     }
   }
   onDestroy() { service().stop(); }
 />
 
-<effect() {
-  // const contextValue = typeof context === "function" ? context() : context;
-  service().setContext(context);
-  // console.log("use-service-effect2", {
-  //   service,
-  //   contextValue,
-  // });
-}/>
+<effect() { service().setContext(context); }/>
 
-<effect() {
-  //   console.log("use-service-effect3-pre", {
-  //   service,
-  //   actions,
-  // });
-  service().setOptions({ actions });
-  // console.log("use-service-effect3-post", {
-  //   service,
-  //   actions,
-  // });
-}/>
+<effect() { service().setOptions({ actions }); }/>
 
 <return=service/>
