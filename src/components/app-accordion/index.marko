@@ -1,7 +1,5 @@
 import * as accordion from "@zag-js/accordion"
 import { normalizeProps } from "../normalize-props";
-import type { ButtonClassProps } from "../app-button/recipes";
-import { twCx } from "../../utils/twCva";
 export type Input = (accordion.Context & {
   items: Marko.RepeatableAttrTag<Marko.Input<"div"> & accordion.ItemProps & {
     trigger: Marko.AttrTag<Marko.Input<"button">>;
@@ -13,6 +11,8 @@ export type Input = (accordion.Context & {
 
 <use-machine/[machineState, send] machine=(machine as any)/>
 <const/api=accordion.connect(machineState as any, send, normalizeProps)/>
+
+<return=api/>
 
 <div ...api.rootProps>
   <for|item| of=input.items>

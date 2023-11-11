@@ -1,0 +1,20 @@
+import * as checkbox from "@zag-js/checkbox";
+import { normalizeProps } from "../normalize-props";
+export type Input = (checkbox.Context & {
+  renderBody: Marko.Body;
+}
+);
+<const/machine=(() => checkbox.machine(input))/>
+
+<use-machine/[machineState, send] machine=(machine as any)/>
+<const/api=checkbox.connect(machineState as any, send, normalizeProps)/>
+
+<return=api/>
+
+<label class="flex flex-row-reverse gap-2 select-none cursor-pointer text-lg" ...api.rootProps>
+  <span ...api.labelProps>
+    <${input.renderBody}/>
+  </span>
+  <div ...api.controlProps />
+  <input class="sr-only" ...api.hiddenInputProps />
+</label>

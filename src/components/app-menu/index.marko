@@ -12,6 +12,8 @@ export type Input = (menu.Context & {
 <use-machine/[machineState, send] machine=machine/>
 <const/api=menu.connect(machineState, send, normalizeProps)/>
 
+<return=api/>
+
 <div>
   <app-button ...api.triggerProps ...input.trigger>
     <${input.trigger.renderBody}/>

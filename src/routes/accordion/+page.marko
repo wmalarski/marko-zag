@@ -1,6 +1,6 @@
 <h2>Accordion</h2>
 
-<app-accordion id="file">
+<app-accordion/api multiple id="file">
   <@items value="Watercraft">
     <@trigger>
       <div class="font-semibold">
@@ -29,3 +29,9 @@
     <@content>Sample accordion content</@content>
   </@items>
 </app-accordion>
+
+<pre>${JSON.stringify(
+  { value: api.value, focusedValue: api.focusedValue },
+  null,
+  2
+)}</pre>
