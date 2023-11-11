@@ -6,11 +6,17 @@
   "dependencies": {
     "@marko/tags-api-preview": "^0.7.2",
     "@zag-js/menu": "^0.27.1",
+    "class-variance-authority": "^0.7.0",
     "hyphenate-style-name": "^1.0.4",
-    "marko": "^5.31.14"
+    "marko": "^5.31.14",
+    "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
-    "@marko/run": "^0.2.15"
+    "@marko/run": "^0.2.15",
+    "autoprefixer": "^10.4.16",
+    "daisyui": "^3.9.4",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5"
   },
   "private": true,
   "scripts": {
