@@ -1,4 +1,4 @@
-import * as accordion from "@zag-js/accordion"
+import * as accordion from "@zag-js/accordion";
 import { normalizeProps } from "../normalize-props";
 export type Input = (accordion.Context & {
   items: Marko.RepeatableAttrTag<Marko.Input<"div"> & accordion.ItemProps & {
@@ -7,7 +7,7 @@ export type Input = (accordion.Context & {
   }>;
 }
 );
-<const/machine=(() => accordion.machine({id: "aa"}))/>
+<const/machine=(() => accordion.machine(input))/>
 
 <use-machine/[machineState, send] machine=(machine as any)/>
 <const/api=accordion.connect(machineState as any, send, normalizeProps)/>

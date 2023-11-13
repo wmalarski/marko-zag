@@ -1,0 +1,34 @@
+import * as combobox from "@zag-js/combobox";
+import { normalizeProps } from "../normalize-props";
+export type Input = (combobox.Context & {
+  items?: Marko.RepeatableAttrTag<Marko.Input<"li"> & combobox.ItemProps>;
+}
+);
+<const/machine=(() => combobox.machine(input))/>
+
+<use-machine/[machineState, send] machine=(machine as any)/>
+<const/api=combobox.connect(machineState as any, send, normalizeProps)/>
+
+<return=api/>
+
+<div>
+  <div ...api.rootProps>
+    <label ...api.labelProps>Select country</label>
+    <div ...api.controlProps>
+      <input ...api.inputProps />
+      <button ...api.triggerProps>▼</button>
+    </div>
+  </div>
+  <div ...api.positionerProps>
+    <if=input.items>
+      <ul ...api.contentProps>
+      <for|item| of=input.items>
+          
+          <li key=item.code ...api.getItemProps({ item })>
+            ${item.label}
+          </li>
+      </for>
+      </ul>
+    </if>
+  </div>
+</div>
