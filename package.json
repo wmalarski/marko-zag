@@ -9,6 +9,7 @@
     "@zag-js/checkbox": "^0.29.0",
     "@zag-js/combobox": "^0.29.0",
     "@zag-js/menu": "^0.27.1",
+    "@zag-js/switch": "^0.29.0",
     "class-variance-authority": "^0.7.0",
     "hyphenate-style-name": "^1.0.4",
     "marko": "^5.31.14",

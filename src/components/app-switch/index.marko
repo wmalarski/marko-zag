@@ -1,0 +1,20 @@
+import * as zagSwitch from "@zag-js/switch"
+import { normalizeProps } from "../normalize-props";
+export type Input = (zagSwitch.Context & {
+  renderBody: Marko.Body;
+}
+);
+<const/machine=(() => zagSwitch.machine(input))/>
+
+<use-machine/[machineState, send] machine=(machine as any)/>
+<const/api=zagSwitch.connect(machineState as any, send, normalizeProps)/>
+
+<return=api/>
+
+<label ...api.rootProps>
+  <input ...api.hiddenInputProps />
+  <span ...api.controlProps>
+    <span ...api.thumbProps />
+  </span>
+  <span ...api.labelProps>${api.isChecked ? "On" : "Off"}</span>
+</label>

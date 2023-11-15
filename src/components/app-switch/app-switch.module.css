@@ -1,0 +1,44 @@
+.root {
+  @apply flex items-center relative leading-[0] w-fit;
+  -moz-box-align: center;
+  --switch-track-diff: calc(
+    var(--switch-track-width) - var(--switch-track-height)
+  );
+  --switch-thumb-x: var(--switch-track-diff);
+  --switch-track-width: 2.7rem;
+  --switch-track-height: 1.5rem;
+}
+
+
+
+.input {
+  @apply h-px overflow-hidden absolute w-px whitespace-nowrap -m-px p-0 border-0 border-none;
+  clip: rect(0px, 0px, 0px, 0px);
+  overflow-wrap: normal;
+}
+
+
+.control:focus,
+.control[data-focus] {
+  @apply shadow-[rgba(66,153,225,0.6)_0px_0px_0px_2px];
+}
+.control {
+  @apply inline-flex shrink-0 justify-start box-content cursor-pointer w-[var(--switch-track-width)] h-[var(--switch-track-height)] transition-[background-color,border-color,color,fill,stroke,opacity,box-shadow,transform] duration p-0.5 rounded-full;
+  background: var(--switch-bg);
+  --switch-bg: #cbd5e0;
+  -moz-box-pack: start;
+}
+
+.control[data-state="checked"] {
+  --switch-bg: #2AB26B;
+}
+
+.thumb::before {
+  @apply transition-[background-color] duration-[0.2s] ease-[ease-in-out] delay-[0s] absolute h-[var(--thumb-size)] w-[var(--thumb-size)] bg-[color:var(--colors-transparent)] content-[""] z-[1] -translate-x-2/4 -translate-y-2/4 rounded-[inherit] left-2/4 top-2/4;
+  --thumb-size: calc(var(--switch-track-height) + 0.7rem);
+}
+
+.label {
+  @apply select-none;
+  margin-inline-start: 0.5rem;
+}
