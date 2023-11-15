@@ -4,6 +4,7 @@ export type Input = (combobox.Context & {
   items?: Marko.RepeatableAttrTag<Marko.Input<"li"> & combobox.ItemProps>;
 }
 );
+
 <const/machine=(() => combobox.machine(input))/>
 
 <use-machine/[machineState, send] machine=(machine as any)/>
@@ -22,12 +23,11 @@ export type Input = (combobox.Context & {
   <div ...api.positionerProps>
     <if=input.items>
       <ul ...api.contentProps>
-      <for|item| of=input.items>
-          
-          <li key=item.code ...api.getItemProps({ item })>
-            ${item.label}
+        <for|item| of=input.items>          
+          <li ...api.getItemProps({ item }) ...item>
+            <${item.renderBody} />
           </li>
-      </for>
+        </for>
       </ul>
     </if>
   </div>
