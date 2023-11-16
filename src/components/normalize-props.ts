@@ -1,6 +1,5 @@
 import { createNormalizer } from "@zag-js/types";
-import { isObject, isString } from "@zag-js/utils";
-import { cssify } from "./cssify";
+import { isString } from "@zag-js/utils";
 
 export type PropTypes = Marko.NativeTags & {
   element: Marko.Input<any>;
@@ -8,9 +7,9 @@ export type PropTypes = Marko.NativeTags & {
 };
 
 const eventMap: Record<string, string> = {
-  onFocus: "onFocusIn",
-  onBlur: "onFocusOut",
-  onDoubleClick: "onDblClick",
+  onFocus: "onFocusin",
+  onBlur: "onFocusout",
+  onDoubleClick: "onDblclick",
   onChange: "onInput",
   defaultChecked: "checked",
   defaultValue: "value",
@@ -30,11 +29,6 @@ export const normalizeProps = createNormalizer<PropTypes>((props: Dict) => {
   for (const key in props) {
     const value = props[key];
 
-    if (key === "style" && isObject(value)) {
-      normalized["style"] = cssify(value);
-      continue;
-    }
-
     if (key === "children") {
       if (isString(value)) {
         normalized["textContent"] = value;
@@ -44,5 +38,11 @@ export const normalizeProps = createNormalizer<PropTypes>((props: Dict) => {
 
     normalized[toMarkoProp(key)] = value;
   }
+
+  console.log({
+    normalized,
+    props,
+  });
+
   return normalized;
 });
