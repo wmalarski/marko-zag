@@ -1,5 +1,6 @@
 import * as zagSwitch from "@zag-js/switch"
 import { normalizeProps } from "../normalize-props";
+import styles from "./app-switch.module.css";
 export type Input = (zagSwitch.Context & {
   renderBody: Marko.Body;
 }
@@ -11,10 +12,10 @@ export type Input = (zagSwitch.Context & {
 
 <return=api/>
 
-<label ...api.rootProps>
-  <input ...api.hiddenInputProps />
-  <span ...api.controlProps>
-    <span ...api.thumbProps />
+<label class=styles.root ...api.rootProps>
+  <input class=styles.input ...api.hiddenInputProps />
+  <span class=styles.control ...api.controlProps>
+    <span class=styles.thumb ...api.thumbProps />
   </span>
-  <span ...api.labelProps>${api.isChecked ? "On" : "Off"}</span>
+  <span class=styles.label ...api.labelProps>${api.isChecked ? "On" : "Off"}</span>
 </label>

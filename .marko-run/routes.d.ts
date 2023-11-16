@@ -15,6 +15,7 @@ declare module "@marko/run" {
 			"/checkbox": Routes["/checkbox"];
 			"/combobox": Routes["/combobox"];
 			"/menu": Routes["/menu"];
+			"/switch": Routes["/switch"];
 		}
 	}> {}
 }
@@ -69,13 +70,23 @@ declare module "../src/routes/menu/+page.marko" {
   }
 }
 
+declare module "../src/routes/switch/+page.marko" {
+  namespace MarkoRun {
+    export { NotHandled, NotMatched, GetPaths, PostPaths, GetablePath, GetableHref, PostablePath, PostableHref, Platform };
+    export type Route = Run.Routes["/switch"];
+    export type Context = Run.MultiRouteContext<Route> & Marko.Global;
+    export type Handler = Run.HandlerLike<Route>;
+    export const route: Run.HandlerTypeFn<Route>;
+  }
+}
+
 declare module "../src/routes/+layout.marko" {
   export interface Input {
     renderBody: Marko.Body;
   }
   namespace MarkoRun {
     export { NotHandled, NotMatched, GetPaths, PostPaths, GetablePath, GetableHref, PostablePath, PostableHref, Platform };
-    export type Route = Run.Routes["/" | "/accordion" | "/checkbox" | "/combobox" | "/menu"];
+    export type Route = Run.Routes["/" | "/accordion" | "/checkbox" | "/combobox" | "/menu" | "/switch"];
     export type Context = Run.MultiRouteContext<Route> & Marko.Global;
     export type Handler = Run.HandlerLike<Route>;
     export const route: Run.HandlerTypeFn<Route>;
@@ -88,4 +99,5 @@ type Routes = {
 	"/checkbox": { verb: "get"; };
 	"/combobox": { verb: "get"; };
 	"/menu": { verb: "get"; };
+	"/switch": { verb: "get"; };
 }
