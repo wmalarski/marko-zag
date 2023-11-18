@@ -5,10 +5,12 @@ export type Input = (zagSwitch.Context & {
   renderBody: Marko.Body;
 }
 );
+
 <const/machine=(() => zagSwitch.machine(input))/>
 
-<use-machine/[machineState, send] machine=machine/>
-<const/api=zagSwitch.connect(machineState, send, normalizeProps)/>
+<use-machine/[machineState, send] machine=(machine as any)/>
+
+<const/api=zagSwitch.connect(machineState as any, send, normalizeProps)/>
 
 <return=api/>
 
@@ -17,5 +19,9 @@ export type Input = (zagSwitch.Context & {
   <span class=styles.control ...api.controlProps>
     <span class=styles.thumb ...api.thumbProps />
   </span>
-  <span class=styles.label ...api.labelProps>${api.isChecked ? "On" : "Off"}</span>
+  <span class=styles.label ...api.labelProps>
+    <${input.renderBody}/>
+  </span>
 </label>
+
+<pre>${JSON.stringify({isChecked: api.isChecked, isDisabled: api.isDisabled, isFocused: api.isFocused}, null, 2)}</pre>
