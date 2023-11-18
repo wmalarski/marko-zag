@@ -15,6 +15,12 @@ const eventMap: Record<string, string> = {
   defaultValue: "value",
   htmlFor: "for",
   className: "class",
+  onPointerMove: "onPointermove",
+  onPointerLeave: "onPointerleave",
+  onPointerDown: "onPointerdown",
+  onPointerUp: "onPointerup",
+  onKeyDown: "onKeydown",
+  onKeyUp: "onKeyup",
 };
 
 function toMarkoProp(prop: string) {
@@ -38,11 +44,6 @@ export const normalizeProps = createNormalizer<PropTypes>((props: Dict) => {
 
     normalized[toMarkoProp(key)] = value;
   }
-
-  console.log({
-    normalized,
-    props,
-  });
 
   return normalized;
 });

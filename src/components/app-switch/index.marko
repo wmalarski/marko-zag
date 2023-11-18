@@ -7,12 +7,12 @@ export type Input = (zagSwitch.Context & {
 );
 <const/machine=(() => zagSwitch.machine(input))/>
 
-<use-machine/[machineState, send] machine=(machine as any)/>
-<const/api=zagSwitch.connect(machineState as any, send, normalizeProps)/>
+<use-machine/[machineState, send] machine=machine/>
+<const/api=zagSwitch.connect(machineState, send, normalizeProps)/>
 
 <return=api/>
 
-<label style={} class=styles.root ...api.rootProps>
+<label class=styles.root ...api.rootProps>
   <input class=styles.input ...api.hiddenInputProps />
   <span class=styles.control ...api.controlProps>
     <span class=styles.thumb ...api.thumbProps />

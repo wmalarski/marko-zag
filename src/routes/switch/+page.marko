@@ -1,6 +1,12 @@
 <h2>Switch</h2>
 
-<app-switch id="switch">
+<let/isChecked=false/>
+
+<app-switch
+  id="switch"
+  onCheckedChange({ checked }) { isChecked = checked; }
+  checked=isChecked
+>
   Switch
 </app-switch>
 <!-- <pre>${JSON.stringify(

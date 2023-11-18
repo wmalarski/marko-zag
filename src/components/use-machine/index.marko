@@ -1,4 +1,4 @@
-import type { MachineSrc } from "@zag-js/core";
+import type { MachineSrc, StateMachine } from "@zag-js/core";
 import type { HookOptions, RSA, SSS, SEO, SAEO } from "../use-service/types";
 export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
   machine: MachineSrc<TC, TS, TE>;
@@ -11,8 +11,6 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
 
 <effect() {
   const unsubscribe = service().subscribe((nextState) => {
-    // reconcile???;
-    console.log(nextState.event);
     machineState = nextState;
   });
   return () => {
@@ -20,4 +18,10 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
   };
 }/>
 
-<return=([machineState, service().send, service] as const)/>
+<return=(
+  [
+    machineState,
+    (event: StateMachine.Event<TE>) => service().send(event),
+    service,
+  ] as const
+)/>
