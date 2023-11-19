@@ -8,6 +8,7 @@
     "@zag-js/accordion": "^0.30.0",
     "@zag-js/checkbox": "^0.30.0",
     "@zag-js/combobox": "^0.30.0",
+    "@zag-js/dialog": "^0.30.0",
     "@zag-js/menu": "^0.30.0",
     "@zag-js/switch": "^0.30.0",
     "class-variance-authority": "^0.7.0",

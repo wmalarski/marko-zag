@@ -1,28 +1,20 @@
 <h2>Switch</h2>
-
-<let/isVisible=true/>
-
-<let/isChecked=false/>
+<!-- <let/isChecked=false/> -->
 <!-- onCheckedChange({ checked }) { isChecked = checked; }
 checked=isChecked -->
 
-<if=isVisible>
-  <app-switch/api
-    id="switch"
-  >
-    Switch
-  </app-switch>
-  <pre>${JSON.stringify(
-    {
-      isChecked: api.isChecked,
-      isDisabled: api.isDisabled,
-      isFocused: api.isFocused,
-    },
-    null,
-    2
-  )}</pre>
-</if>
+<id/switchId/>
 
-<button onClick() { isVisible = !isVisible; }>
-  Toggle
-</button>
+<app-switch/api id=switchId>
+  Switch
+</app-switch>
+
+<pre>${JSON.stringify(
+  {
+    isChecked: api.isChecked,
+    isDisabled: api.isDisabled,
+    isFocused: api.isFocused,
+  },
+  null,
+  2
+)}</pre>
