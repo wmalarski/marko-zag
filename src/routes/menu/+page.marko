@@ -1,24 +1,26 @@
-<h2>Menu</h2>
+<examples-layout>
+  <@item title="Menu">
+    <id/menuId/>
 
-<id/menuId/>
-
-<app-menu id=menuId aria-label="File">
-  <@trigger>
-    Actions
-    <span aria-hidden="true">
-      ▾
-    </span>
-  </@trigger>
-  <@items id="edit">
-    Edit
-  </@items>
-  <@items id="duplicate">
-    Duplicate
-  </@items>
-  <@items id="delete">
-    Delete
-  </@items>
-  <@items id="export">
-    Export...
-  </@items>
-</app-menu>
+    <app-menu id=menuId aria-label="File">
+      <@trigger>
+        Actions
+        <span aria-hidden="true">
+          ▾
+        </span>
+      </@trigger>
+      <@items id="edit">
+        Edit
+      </@items>
+      <@items id="duplicate">
+        Duplicate
+      </@items>
+      <@items id="delete">
+        Delete
+      </@items>
+      <@items id="export">
+        Export...
+      </@items>
+    </app-menu>
+  </@item>
+</examples-layout>

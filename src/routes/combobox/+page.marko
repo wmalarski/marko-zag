@@ -1,47 +1,49 @@
 import * as combobox from "@zag-js/combobox";
 
-<h2>Combobox</h2>
+<examples-layout>
+  <@item title="Combobox">
+    <const/comboboxData=[
+      { label: "Zambia", code: "ZA" },
+      { label: "Benin", code: "BN" },
+      { label: "Watercraft", code: "Watercraft" },
+      { label: "Automobiles", code: "Automobiles" },
+      { label: "Aircrafts", code: "Aircrafts" },
+    ]/>
 
-<const/comboboxData=[
-  { label: "Zambia", code: "ZA" },
-  { label: "Benin", code: "BN" },
-  { label: "Watercraft", code: "Watercraft" },
-  { label: "Automobiles", code: "Automobiles" },
-  { label: "Aircrafts", code: "Aircrafts" },
-]/>
+    <const/collection=combobox.collection({
+      items: comboboxData,
+      itemToValue: (item) => item.code,
+      itemToString: (item) => item.label,
+    })/>
 
-<const/collection=combobox.collection({
-  items: comboboxData,
-  itemToValue: (item) => item.code,
-  itemToString: (item) => item.label,
-})/>
+    <id/comboboxId/>
 
-<id/comboboxId/>
+    <app-combobox/api id=comboboxId collection=collection>
+      <@items item="Watercraft">
+        Watercraft
+      </@items>
+      <@items item="Automobiles">
+        Automobiles
+      </@items>
+      <@items item="Aircrafts">
+        Aircrafts
+      </@items>
+    </app-combobox>
 
-<app-combobox/api id=comboboxId collection=collection>
-  <@items item="Watercraft">
-    Watercraft
-  </@items>
-  <@items item="Automobiles">
-    Automobiles
-  </@items>
-  <@items item="Aircrafts">
-    Aircrafts
-  </@items>
-</app-combobox>
-
-<pre>${JSON.stringify(
-  {
-    value: api.value,
-    hasSelectedItems: api.hasSelectedItems,
-    highlightedItem: api.highlightedItem,
-    highlightValue: api.highlightValue,
-    inputValue: api.inputValue,
-    isFocused: api.isFocused,
-    isInputValueEmpty: api.isInputValueEmpty,
-    isOpen: api.isOpen,
-    selectedItems: api.selectedItems,
-  },
-  null,
-  2
-)}</pre>
+    <pre>${JSON.stringify(
+      {
+        value: api.value,
+        hasSelectedItems: api.hasSelectedItems,
+        highlightedItem: api.highlightedItem,
+        highlightValue: api.highlightValue,
+        inputValue: api.inputValue,
+        isFocused: api.isFocused,
+        isInputValueEmpty: api.isInputValueEmpty,
+        isOpen: api.isOpen,
+        selectedItems: api.selectedItems,
+      },
+      null,
+      2
+    )}</pre>
+  </@item>
+</examples-layout>

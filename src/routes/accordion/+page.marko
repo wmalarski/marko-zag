@@ -1,39 +1,40 @@
-<h2>Accordion</h2>
+<examples-layout>
+  <@item title="Accordion">
+    <id/accordionId/>
+    <app-accordion/api multiple id=accordionId>
+      <@items value="Watercraft">
+        <@trigger>
+          <div class="font-semibold">
+            Watercraft
+          </div>
+          <div>Yacht, Boats and Dinghies</div>
+        </@trigger>
+        <@content>Sample accordion content</@content>
+      </@items>
+      <@items value="Automobiles">
+        <@trigger>
+          <div class="font-semibold">
+            Automobiles
+          </div>
+          <div>Cars, Trucks and Vans</div>
+        </@trigger>
+        <@content>Sample accordion content</@content>
+      </@items>
+      <@items value="Aircrafts">
+        <@trigger>
+          <div class="font-semibold">
+            Aircrafts
+          </div>
+          <div>Airplanes, Helicopters and Rockets</div>
+        </@trigger>
+        <@content>Sample accordion content</@content>
+      </@items>
+    </app-accordion>
 
-<id/accordionId/>
-
-<app-accordion/api multiple id=accordionId>
-  <@items value="Watercraft">
-    <@trigger>
-      <div class="font-semibold">
-        Watercraft
-      </div>
-      <div>Yacht, Boats and Dinghies</div>
-    </@trigger>
-    <@content>Sample accordion content</@content>
-  </@items>
-  <@items value="Automobiles">
-    <@trigger>
-      <div class="font-semibold">
-        Automobiles
-      </div>
-      <div>Cars, Trucks and Vans</div>
-    </@trigger>
-    <@content>Sample accordion content</@content>
-  </@items>
-  <@items value="Aircrafts">
-    <@trigger>
-      <div class="font-semibold">
-        Aircrafts
-      </div>
-      <div>Airplanes, Helicopters and Rockets</div>
-    </@trigger>
-    <@content>Sample accordion content</@content>
-  </@items>
-</app-accordion>
-
-<pre>${JSON.stringify(
-  { value: api.value, focusedValue: api.focusedValue },
-  null,
-  2
-)}</pre>
+    <pre>${JSON.stringify(
+      { value: api.value, focusedValue: api.focusedValue },
+      null,
+      2
+    )}</pre>
+  </@item>
+</examples-layout>

@@ -1,19 +1,21 @@
-<h2>Checkbox</h2>
+<examples-layout>
+  <@item title="Checkbox">
+    <id/checkboxId/>
 
-<id/checkboxId/>
+    <app-checkbox/api id=checkboxId>
+      Input
+    </app-checkbox>
 
-<app-checkbox/api id=checkboxId>
-  Input
-</app-checkbox>
-
-<pre>${JSON.stringify(
-  {
-    checkedState: api.checkedState,
-    isChecked: api.isChecked,
-    isDisabled: api.isDisabled,
-    isFocused: api.isFocused,
-    isIndeterminate: api.isIndeterminate,
-  },
-  null,
-  2
-)}</pre>
+    <pre>${JSON.stringify(
+      {
+        checkedState: api.checkedState,
+        isChecked: api.isChecked,
+        isDisabled: api.isDisabled,
+        isFocused: api.isFocused,
+        isIndeterminate: api.isIndeterminate,
+      },
+      null,
+      2
+    )}</pre>
+  </@item>
+</examples-layout>
