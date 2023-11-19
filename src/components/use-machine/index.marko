@@ -9,17 +9,21 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
 
 <let/machineState=service().getState()/>
 
-<lifecycle onMount() {
-  console.log("onMount");
-  return () => {
-    console.log("onMount-desc");
-  };
-}/>
-
-<effect() { console.log("use-machine-simple", service); }/>
 <effect() {
   console.log("use-machine-effect");
   const unsubscribe = service().subscribe((nextState) => {
+    const event = nextState.event as any;
+    if (
+      event.context &&
+      !("focused" in event.context) &&
+      !("hovered" in event.context)
+    ) {
+      console.log(
+        "use-machine",
+        JSON.stringify(nextState.event, null, 2),
+        JSON.stringify(nextState.context, null, 2)
+      );
+    }
     machineState = nextState;
   });
   return () => {

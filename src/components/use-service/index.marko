@@ -7,19 +7,12 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
 
 <const/{ actions, state: hydratedState, context }=(input.options ?? {})/>
 
-<let/getService=(
-  () => {
-    console.log("getService");
-    const _machine =
-      typeof input.machine === "function" ? input.machine() : input.machine;
-    const result = context ? _machine.withContext(context) : _machine;
-    return () => result;
-  }
-)/>
-
-<let/service=getService()/>
-
-<effect() { console.log("use-service-simple", service); }/>
+<let/service=(() => {
+  const _machine =
+    typeof input.machine === "function" ? input.machine() : input.machine;
+  const result = context ? _machine.withContext(context) : _machine;
+  return () => result;
+})()/>
 
 <lifecycle
   onMount() {
@@ -34,9 +27,6 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
 
 <effect() { service().setContext(context); }/>
 
-<effect() {
-  console.log("setOptions");
-  service().setOptions({ actions: input.options?.actions });
-}/>
+<effect() { service().setOptions({ actions }); }/>
 
 <return=service/>
