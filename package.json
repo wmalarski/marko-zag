@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "dependencies": {
+    "@marko-tags/portal": "^1.2.2",
     "@marko/tags-api-preview": "^0.7.2",
     "@zag-js/accordion": "^0.30.0",
     "@zag-js/checkbox": "^0.30.0",
