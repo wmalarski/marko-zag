@@ -14,7 +14,14 @@ export type Input = (zagSwitch.Context & {
 
 <return=api/>
 
-<label class=styles.root ...api.rootProps>
+<effect() {
+  console.log(api.rootProps);
+} />
+
+<label class=styles.root ...api.rootProps onPointerup(event: any) {
+  console.log("onPointerup", event);
+  return api.rootProps.onPointerup(event);
+}>
   <input class=styles.input ...api.hiddenInputProps />
   <span class=styles.control ...api.controlProps>
     <span class=styles.thumb ...api.thumbProps />
@@ -23,3 +30,9 @@ export type Input = (zagSwitch.Context & {
     <${input.renderBody}/>
   </span>
 </label>
+
+<button onClick() {
+  api.toggleChecked();  
+}>
+  Toggle
+</button>

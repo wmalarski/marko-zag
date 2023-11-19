@@ -1,32 +1,40 @@
 import { createNormalizer } from "@zag-js/types";
 import { isString } from "@zag-js/utils";
 
-export type PropTypes = Marko.NativeTags & {
-  element: Marko.Input<any>;
-  style: Marko.Input<any>["style"];
-};
+// export type PropTypes = Marko.NativeTags & {
+//   element: Marko.Input<any>;
+//   style: Marko.Input<any>["style"];
+// };
+
+export type PropTypes = Marko.Input<any>;
 
 const eventMap: Record<string, string> = {
-  onFocus: "onFocusin",
-  onBlur: "onFocusout",
-  onDoubleClick: "onDblclick",
-  onChange: "onInput",
+  className: "class",
   defaultChecked: "checked",
   defaultValue: "value",
   htmlFor: "for",
-  className: "class",
-  onPointerMove: "onPointermove",
-  onPointerLeave: "onPointerleave",
-  onPointerDown: "onPointerdown",
-  onPointerUp: "onPointerup",
+  onBlur: "onFocusout",
+  // onChange: "onInput",
+  onCompositionEnd: "onCompositionend",
+  onCompositionStart: "onCompositionstart",
+  onContextMenu: "onContextmenu",
+  onDoubleClick: "onDblclick",
+  onDragStart: "onDragstart",
+  onFocus: "onFocusin",
   onKeyDown: "onKeydown",
   onKeyUp: "onKeyup",
+  onPointerCancel: "onPointercancel",
+  onPointerDown: "onPointerdown",
+  onPointerEnter: "onPointerenter",
+  onPointerLeave: "onPointerleave",
+  onPointerMove: "onPointermove",
+  onPointerUp: "onPointerup",
 };
 
 function toMarkoProp(prop: string) {
-  // if (!(prop in eventMap)) {
-  //   console.log("toMarkoProp", prop);
-  // }
+  if (!(prop in eventMap) && prop.startsWith("on")) {
+    console.log("toMarkoProp", prop);
+  }
 
   return prop in eventMap ? eventMap[prop] : prop;
 }

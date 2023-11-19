@@ -27,6 +27,6 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
 
 <effect() { service().setContext(context); }/>
 
-<effect() { service().setOptions({ actions }); }/>
+<effect() { service().setOptions({ actions, debug: true }); }/>
 
 <return=service/>
