@@ -5,8 +5,8 @@ import { twCx } from "../../utils/twCva";
 import styles from "./app-dialog.module.css";
 export type Input = (dialog.Context & {
   close?: Marko.AttrTag<Marko.Input<"button"> & ButtonClassProps>;
-  content: Marko.AttrTag<{ renderBody: Marko.Body; }>;
   description?: Marko.AttrTag<Marko.Input<"p">>;
+  renderBody: Marko.Body;
   title?: Marko.AttrTag<Marko.Input<"h2">>;
   trigger: Marko.AttrTag<Marko.Input<"button"> & ButtonClassProps>;
 }
@@ -37,7 +37,7 @@ export type Input = (dialog.Context & {
             <${input.description.renderBody}/>
           </p>
         </if>
-        <${input.content.renderBody}/>
+        <${input.renderBody}/>
         <if=input.close>
           <button ...api.closeTriggerProps ...input.close class=twCx(styles.close, input.close.class)>
             <${input.close.renderBody}/>
