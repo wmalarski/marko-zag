@@ -1,7 +1,7 @@
 import * as combobox from "@zag-js/combobox";
 import { normalizeProps } from "../normalize-props";
 export type Input = (combobox.Context & {
-  items?: Marko.RepeatableAttrTag<Marko.Input<"li"> & combobox.ItemProps>;
+  item?: Marko.RepeatableAttrTag<Marko.Input<"li"> & combobox.ItemProps>;
 }
 );
 
@@ -21,9 +21,9 @@ export type Input = (combobox.Context & {
     </div>
   </div>
   <div ...api.positionerProps>
-    <if=input.items>
+    <if=input.item>
       <ul ...api.contentProps>
-        <for|item| of=input.items>          
+        <for|item| of=input.item>          
           <li ...api.getItemProps({ item }) ...item>
             <${item.renderBody} />
           </li>

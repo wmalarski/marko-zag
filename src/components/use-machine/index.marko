@@ -10,22 +10,7 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
 <let/machineState=service().getState()/>
 
 <effect() {
-  console.log("use-machine-effect");
   const unsubscribe = service().subscribe((nextState) => {
-    const event = nextState.event as any;
-    console.log("use-machine-all", event);
-    if (
-      event.context &&
-      !("focused" in event.context) &&
-      !("hovered" in event.context)
-    ) {
-      console.log(
-        "use-machine",
-        JSON.stringify(nextState.event, null, 2),
-        JSON.stringify(nextState.context, null, 2),
-        nextState
-      );
-    }
     machineState = nextState;
   });
   return () => {
@@ -36,7 +21,12 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
 <return=(
   [
     machineState,
-    (event: StateMachine.Event<TE>) => service().send(event),
+    (event: StateMachine.Event<TE>) => {
+      if ((event as any).type === "CHECKED.SET") {
+        console.log("use-machine-send", event);
+      }
+      service().send(event);
+    },
     service,
   ] as const
 )/>

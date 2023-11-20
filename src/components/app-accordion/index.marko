@@ -1,7 +1,7 @@
 import * as accordion from "@zag-js/accordion";
 import { normalizeProps } from "../normalize-props";
 export type Input = (accordion.Context & {
-  items: Marko.RepeatableAttrTag<Marko.Input<"div"> & accordion.ItemProps & {
+  item: Marko.RepeatableAttrTag<Marko.Input<"div"> & accordion.ItemProps & {
     trigger: Marko.AttrTag<Marko.Input<"button">>;
     content: Marko.AttrTag<Marko.Input<"div">>;
   }>;
@@ -15,7 +15,7 @@ export type Input = (accordion.Context & {
 <return=api/>
 
 <div ...api.rootProps>
-  <for|item| of=input.items>
+  <for|item| of=input.item>
     <const/{value, disabled, trigger, content, ...rest }=item/>
     <div class="border text-sm bg-base-300" ...api.getItemProps({ value, disabled }) ...rest>
       <h3>

@@ -32,10 +32,6 @@ const eventMap: Record<string, string> = {
 };
 
 function toMarkoProp(prop: string) {
-  if (!(prop in eventMap) && prop.startsWith("on")) {
-    console.log("toMarkoProp", prop);
-  }
-
   return prop in eventMap ? eventMap[prop] : prop;
 }
 

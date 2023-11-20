@@ -3,8 +3,8 @@ import { normalizeProps } from "../normalize-props";
 import type { ButtonClassProps } from "../app-button/recipes";
 import { twCx } from "../../utils/twCva";
 export type Input = (menu.Context & {
+  item: Marko.RepeatableAttrTag<Marko.Input<"li"> & menu.ItemProps>;
   trigger: Marko.AttrTag<Marko.Input<"button"> & ButtonClassProps>;
-  items: Marko.RepeatableAttrTag<Marko.Input<"li"> & menu.ItemProps>;
 }
 );
 <const/machine=(() => menu.machine(input))/>
@@ -23,7 +23,7 @@ export type Input = (menu.Context & {
       class="pointer-events-auto w-60 p-2 isolate list-none shadow-md bg-base-200"
       ...api.contentProps
     >
-      <for|item| of=input.items>
+      <for|item| of=input.item>
         <const/{ id, closeOnSelect, disabled, valueText, class: className, ...rest }=item/>
         <li 
           ...api.getItemProps({ id, closeOnSelect, disabled, valueText }) 
