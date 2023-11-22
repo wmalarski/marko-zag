@@ -21,12 +21,7 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
 <return=(
   [
     machineState,
-    (event: StateMachine.Event<TE>) => {
-      if ((event as any).type === "CHECKED.SET") {
-        console.log("use-machine-send", event);
-      }
-      service().send(event);
-    },
+    (event: StateMachine.Event<TE>) => service().send(event),
     service,
   ] as const
 )/>
