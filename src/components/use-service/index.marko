@@ -1,5 +1,6 @@
 import type { MachineSrc } from "@zag-js/core";
 import type { HookOptions, RSA, SSS, SEO, SAEO } from "./types";
+import { getService } from "./utils";
 export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
   machine: MachineSrc<TC, TS, TE>;
   options?: HookOptions<TC, TS, TE>;
@@ -7,12 +8,11 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
 
 <const/{ actions, state: hydratedState, context }=(input.options ?? {})/>
 
-<let/service=(() => {
-  const _machine =
-    typeof input.machine === "function" ? input.machine() : input.machine;
-  const result = context ? _machine.withContext(context) : _machine;
-  return () => result;
-})()/>
+<effect() { console.log("use-service.input.machine", input.machine); }/>
+
+<effect() { console.log("input.options", input.options); }/>
+
+<let/service=getService(input.machine, input.options)/>
 
 <lifecycle
   onMount() {

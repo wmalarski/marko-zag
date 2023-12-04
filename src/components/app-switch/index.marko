@@ -6,7 +6,21 @@ export type Input = (zagSwitch.Context & {
 }
 );
 
-<const/machine=(() => zagSwitch.machine(input))/>
+<const/machine=(() => zagSwitch.machine({
+  checked: input.checked,
+  dir: input.dir,
+  disabled: input.disabled,
+  form: input.form,
+  getRootNode: input.getRootNode,
+  id: input.id,
+  ids: input.ids,
+  invalid: input.invalid,
+  label: input.label,
+  name: input.name,
+  onCheckedChange: input.onCheckedChange,
+  required: input.required,
+  value: input.value,  
+}))/>
 
 <use-machine/[machineState, send] machine=(machine as any)/>
 
