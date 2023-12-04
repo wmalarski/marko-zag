@@ -7,7 +7,26 @@ export type Input = (menu.Context & {
   trigger: Marko.AttrTag<Marko.Input<"button"> & ButtonClassProps>;
 }
 );
-<const/machine=(() => menu.machine(input))/>
+<const/machine=(() => menu.machine({
+  id: input.id,
+  "aria-label": input["aria-label"],
+  anchorPoint: input.anchorPoint,
+  closeOnSelect: input.closeOnSelect,
+  dir: input.dir,
+  getRootNode: input.getRootNode,
+  highlightedId: input.highlightedId,
+  ids: input.ids,
+  loop: input.loop,
+  onFocusOutside: input.onFocusOutside,
+  onInteractOutside: input.onInteractOutside,
+  onOpenChange: input.onOpenChange,
+  onPointerDownOutside: input.onPointerDownOutside,
+  onSelect: input.onSelect,
+  onValueChange: input.onValueChange,
+  open: input.open,
+  positioning: input.positioning,
+  value: input.value,
+}))/>
 
 <use-machine/[machineState, send] machine=machine/>
 <const/api=menu.connect(machineState, send, normalizeProps)/>

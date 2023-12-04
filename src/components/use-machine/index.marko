@@ -5,8 +5,6 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
   options?: HookOptions<TC, TS, TE>;
 }
 
-<effect() { console.log("use-machine.input.machine", input.machine); }/>
-
 <use-service/service machine=input.machine options=input.options/>
 
 <let/machineState=service().getState()/>

@@ -9,7 +9,6 @@ export const getService = <
   machine: MachineSrc<TContext, TState, TEvent>,
   options?: HookOptions<TContext, TState, TEvent>,
 ) => {
-  console.log("machine");
   const _machine = typeof machine === "function" ? machine() : machine;
   const result = options?.context
     ? _machine.withContext(options?.context)

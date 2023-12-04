@@ -8,11 +8,7 @@ export interface Input<TC extends RSA, TS extends SSS, TE extends SEO = SAEO> {
 
 <const/{ actions, state: hydratedState, context }=(input.options ?? {})/>
 
-<effect() { console.log("use-service.input.machine", input.machine); }/>
-
-<effect() { console.log("input.options", input.options); }/>
-
-<let/service=getService(input.machine, input.options)/>
+<const/service=getService(input.machine, input.options)/>
 
 <lifecycle
   onMount() {

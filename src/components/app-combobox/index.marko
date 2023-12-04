@@ -5,7 +5,40 @@ export type Input = (combobox.Context & {
 }
 );
 
-<const/machine=(() => combobox.machine(input))/>
+<const/machine=(() => combobox.machine({
+  collection: input.collection,
+  id: input.id,
+  allowCustomValue: input.allowCustomValue,
+  autoFocus: input.autoFocus,
+  closeOnSelect: input.closeOnSelect,
+  dir: input.dir,
+  disabled: input.disabled,
+  form: input.form,
+  getRootNode: input.getRootNode,
+  highlightedValue: input.highlightedValue,
+  ids: input.ids,
+  inputBehavior: input.inputBehavior,
+  inputValue: input.inputValue,
+  invalid: input.invalid,
+  loop: input.loop,
+  multiple: input.multiple,
+  name: input.name,
+  onFocusOutside: input.onFocusOutside,
+  onHighlightChange: input.onHighlightChange,
+  onInputValueChange: input.onInputValueChange,
+  onInteractOutside: input.onInteractOutside,
+  onOpenChange: input.onOpenChange,
+  onPointerDownOutside: input.onPointerDownOutside,
+  onValueChange: input.onValueChange,
+  openOnClick: input.openOnClick,
+  placeholder: input.placeholder,
+  positioning: input.positioning,
+  readOnly: input.readOnly,
+  selectionBehavior: input.selectionBehavior,
+  selectOnBlur: input.selectOnBlur,
+  translations: input.translations,
+  value: input.value,
+}))/>
 
 <use-machine/[machineState, send] machine=(machine as any)/>
 <const/api=combobox.connect(machineState as any, send, normalizeProps)/>

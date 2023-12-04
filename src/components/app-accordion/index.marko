@@ -7,10 +7,22 @@ export type Input = (accordion.Context & {
   }>;
 }
 );
-<const/machine=(() => accordion.machine(input))/>
+<const/machine=(() => accordion.machine({
+  id: input.id,
+  collapsible: input.collapsible,
+  dir: input.dir,
+  disabled: input.disabled,
+  getRootNode: input.getRootNode,
+  ids: input.ids,
+  multiple: input.multiple,
+  onFocusChange: input.onFocusChange,
+  onValueChange: input.onValueChange,
+  orientation: input.orientation,
+  value: input.value,
+}))/>
 
-<use-machine/[machineState, send] machine=(machine as any)/>
-<const/api=accordion.connect(machineState as any, send, normalizeProps)/>
+<use-machine/[machineState, send] machine=machine/>
+<const/api=accordion.connect(machineState, send, normalizeProps)/>
 
 <return=api/>
 

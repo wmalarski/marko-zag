@@ -11,7 +11,28 @@ export type Input = (dialog.Context & {
   trigger: Marko.AttrTag<Marko.Input<"button"> & ButtonClassProps>;
 }
 );
-<const/machine=(() => dialog.machine(input))/>
+<const/machine=(() => dialog.machine({
+  id: input.id,
+  "aria-label": input["aria-label"],
+  closeOnEscapeKeyDown: input.closeOnEscapeKeyDown,
+  closeOnInteractOutside: input.closeOnInteractOutside,
+  dir: input.dir,
+  finalFocusEl: input.finalFocusEl,
+  getRootNode: input.getRootNode,
+  ids: input.ids,
+  initialFocusEl: input.initialFocusEl,
+  modal: input.modal,
+  onEscapeKeyDown: input.onEscapeKeyDown,
+  onFocusOutside: input.onFocusOutside,
+  onInteractOutside: input.onInteractOutside,
+  onOpenChange: input.onOpenChange,
+  onPointerDownOutside: input.onPointerDownOutside,
+  open: input.open,
+  preventScroll: input.preventScroll,
+  restoreFocus: input.restoreFocus,
+  role: input.role,
+  trapFocus: input.trapFocus,
+}))/>
 
 <use-machine/[machineState, send] machine=(machine)/>
 <const/api=dialog.connect(machineState, send, normalizeProps)/>
