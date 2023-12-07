@@ -3,18 +3,21 @@
 
     <id/switchId/>
 
-    <app-switch/api id=switchId>
-      Switch
+    <app-switch/ref|api| id=switchId>
+      <if=api.isChecked>
+        On
+      </if>
+      <else>Off</else>
     </app-switch>
 
     <pre>${JSON.stringify(
       {
-        isChecked: api.isChecked,
-        isDisabled: api.isDisabled,
-        isFocused: api.isFocused,
+        isChecked: ref.isChecked,
+        isDisabled: ref.isDisabled,
+        isFocused: ref.isFocused,
       },
       null,
-      2
+      2,
     )}</pre>
   </@item>
 </examples-layout>

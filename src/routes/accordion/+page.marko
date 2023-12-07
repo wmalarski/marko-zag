@@ -3,8 +3,11 @@
     <id/accordionId/>
     <app-accordion/api multiple id=accordionId>
       <@item value="Watercraft">
-        <@trigger>
-          <div class="font-semibold">
+        <@trigger|ref|>
+          <const/selectedClass=(
+            ref.value.includes("Watercraft") ? "underline" : ""
+          )/>
+          <div class=["font-semibold", selectedClass]>
             Watercraft
           </div>
           <div>Yacht, Boats and Dinghies</div>
@@ -34,7 +37,7 @@
     <pre>${JSON.stringify(
       { value: api.value, focusedValue: api.focusedValue },
       null,
-      2
+      2,
     )}</pre>
   </@item>
 </examples-layout>
