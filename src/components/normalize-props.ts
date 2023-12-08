@@ -1,11 +1,6 @@
 import { createNormalizer } from "@zag-js/types";
 import { isString } from "@zag-js/utils";
 
-// export type PropTypes = Marko.NativeTags & {
-//   element: Marko.Input<any>;
-//   style: Marko.Input<any>["style"];
-// };
-
 export type PropTypes = Marko.Input<any>;
 
 const eventMap: Record<string, string> = {
@@ -14,7 +9,6 @@ const eventMap: Record<string, string> = {
   defaultValue: "value",
   htmlFor: "for",
   onBlur: "onFocusout",
-  // onChange: "onInput",
   onCompositionEnd: "onCompositionend",
   onCompositionStart: "onCompositionstart",
   onContextMenu: "onContextmenu",

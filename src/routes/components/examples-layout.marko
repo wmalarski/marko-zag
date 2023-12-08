@@ -9,7 +9,9 @@ export type Input = ({
 <ul class="w-full p-8">
   <for|item| of=input.item>
     <li class="flex flex-col gap-4 w-full">
-      <h2 class="text-xl">${item.title}</h2>
+      <h2 class="text-xl">
+        ${item.title}
+      </h2>
       <div class="grid grid-cols-2 gap-4 w-full">
         <${item.renderBody}/>
       </div>

@@ -2,8 +2,11 @@
   <@item title="Checkbox">
     <id/checkboxId/>
 
-    <app-checkbox/api id=checkboxId>
-      Input
+    <app-checkbox/api|ref| id=checkboxId>
+      <if=ref.isChecked>
+        On
+      </if>
+      <else>Off</else>
     </app-checkbox>
 
     <pre>${JSON.stringify(
@@ -15,7 +18,7 @@
         isIndeterminate: api.isIndeterminate,
       },
       null,
-      2
+      2,
     )}</pre>
   </@item>
 </examples-layout>

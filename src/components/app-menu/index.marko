@@ -3,30 +3,37 @@ import { normalizeProps } from "../normalize-props";
 import type { ButtonClassProps } from "../app-button/recipes";
 import { twCx } from "../../utils/twCva";
 export type Input = (menu.Context & {
-  item: Marko.RepeatableAttrTag<Marko.Input<"li"> & menu.ItemProps>;
-  trigger: Marko.AttrTag<Marko.Input<"button"> & ButtonClassProps>;
+  item: Marko.RepeatableAttrTag<Omit<Marko.Input<"li">, 'renderBody'> & menu.ItemProps & {
+      renderBody: Marko.Body<[menu.Api<any>]>;
+    }>;
+  trigger: Marko.AttrTag<Omit<Marko.Input<"button">, 'renderBody'> & ButtonClassProps & {
+      renderBody: Marko.Body<[menu.Api<any>]>;
+    }>;
 }
 );
-<const/machine=(() => menu.machine({
-  id: input.id,
-  "aria-label": input["aria-label"],
-  anchorPoint: input.anchorPoint,
-  closeOnSelect: input.closeOnSelect,
-  dir: input.dir,
-  getRootNode: input.getRootNode,
-  highlightedId: input.highlightedId,
-  ids: input.ids,
-  loop: input.loop,
-  onFocusOutside: input.onFocusOutside,
-  onInteractOutside: input.onInteractOutside,
-  onOpenChange: input.onOpenChange,
-  onPointerDownOutside: input.onPointerDownOutside,
-  onSelect: input.onSelect,
-  onValueChange: input.onValueChange,
-  open: input.open,
-  positioning: input.positioning,
-  value: input.value,
-}))/>
+<const/machine=(
+  () =>
+    menu.machine({
+      id: input.id,
+      "aria-label": input["aria-label"],
+      anchorPoint: input.anchorPoint,
+      closeOnSelect: input.closeOnSelect,
+      dir: input.dir,
+      getRootNode: input.getRootNode,
+      highlightedId: input.highlightedId,
+      ids: input.ids,
+      loop: input.loop,
+      onFocusOutside: input.onFocusOutside,
+      onInteractOutside: input.onInteractOutside,
+      onOpenChange: input.onOpenChange,
+      onPointerDownOutside: input.onPointerDownOutside,
+      onSelect: input.onSelect,
+      onValueChange: input.onValueChange,
+      open: input.open,
+      positioning: input.positioning,
+      value: input.value,
+    })
+)/>
 
 <use-machine/[machineState, send] machine=machine/>
 <const/api=menu.connect(machineState, send, normalizeProps)/>
@@ -35,7 +42,7 @@ export type Input = (menu.Context & {
 
 <div>
   <app-button ...api.triggerProps ...input.trigger>
-    <${input.trigger.renderBody}/>
+    <${input.trigger.renderBody}=[api]/>
   </app-button>
   <div ...api.positionerProps>
     <ul
@@ -43,13 +50,20 @@ export type Input = (menu.Context & {
       ...api.contentProps
     >
       <for|item| of=input.item>
-        <const/{ id, closeOnSelect, disabled, valueText, class: className, ...rest }=item/>
-        <li 
-          ...api.getItemProps({ id, closeOnSelect, disabled, valueText }) 
-          class=twCx("py-1 px-2 cursor-pointer", className) 
+        <const/{
+          id,
+          closeOnSelect,
+          disabled,
+          valueText,
+          class: className,
+          ...rest
+        }=item/>
+        <li
+          ...api.getItemProps({ id, closeOnSelect, disabled, valueText })
+          class=twCx("py-1 px-2 cursor-pointer", className)
           ...rest
         >
-          <${item.renderBody}/>
+          <${item.renderBody}=[api]/>
         </li>
       </for>
     </ul>

@@ -1,67 +1,90 @@
-import * as dialog from "@zag-js/dialog"
+import * as dialog from "@zag-js/dialog";
 import type { ButtonClassProps } from "../app-button/recipes";
 import { normalizeProps } from "../normalize-props";
 import { twCx } from "../../utils/twCva";
 import styles from "./app-dialog.module.css";
 export type Input = (dialog.Context & {
-  close?: Marko.AttrTag<Marko.Input<"button"> & ButtonClassProps>;
-  description?: Marko.AttrTag<Marko.Input<"p">>;
-  renderBody: Marko.Body;
-  title?: Marko.AttrTag<Marko.Input<"h2">>;
-  trigger: Marko.AttrTag<Marko.Input<"button"> & ButtonClassProps>;
+  close?: Marko.AttrTag<Omit<Marko.Input<"button">, 'renderBody'> & ButtonClassProps & {
+      renderBody: Marko.Body<[dialog.Api<any>]>;
+    }>;
+  description?: Marko.AttrTag<Omit<Marko.Input<"p">, 'renderBody'> & {
+      renderBody: Marko.Body<[dialog.Api<any>]>;
+    }>;
+  renderBody: Marko.Body<[dialog.Api<any>]>;
+  title?: Marko.AttrTag<Omit<Marko.Input<"h2">, 'renderBody'> & {
+      renderBody: Marko.Body<[dialog.Api<any>]>;
+    }>;
+  trigger: Marko.AttrTag<Omit<Marko.Input<"button">, 'renderBody'> & ButtonClassProps & {
+      renderBody: Marko.Body<[dialog.Api<any>]>;
+    }>;
 }
 );
-<const/machine=(() => dialog.machine({
-  id: input.id,
-  "aria-label": input["aria-label"],
-  closeOnEscapeKeyDown: input.closeOnEscapeKeyDown,
-  closeOnInteractOutside: input.closeOnInteractOutside,
-  dir: input.dir,
-  finalFocusEl: input.finalFocusEl,
-  getRootNode: input.getRootNode,
-  ids: input.ids,
-  initialFocusEl: input.initialFocusEl,
-  modal: input.modal,
-  onEscapeKeyDown: input.onEscapeKeyDown,
-  onFocusOutside: input.onFocusOutside,
-  onInteractOutside: input.onInteractOutside,
-  onOpenChange: input.onOpenChange,
-  onPointerDownOutside: input.onPointerDownOutside,
-  open: input.open,
-  preventScroll: input.preventScroll,
-  restoreFocus: input.restoreFocus,
-  role: input.role,
-  trapFocus: input.trapFocus,
-}))/>
+<const/machine=(
+  () =>
+    dialog.machine({
+      id: input.id,
+      "aria-label": input["aria-label"],
+      closeOnEscapeKeyDown: input.closeOnEscapeKeyDown,
+      closeOnInteractOutside: input.closeOnInteractOutside,
+      dir: input.dir,
+      finalFocusEl: input.finalFocusEl,
+      getRootNode: input.getRootNode,
+      ids: input.ids,
+      initialFocusEl: input.initialFocusEl,
+      modal: input.modal,
+      onEscapeKeyDown: input.onEscapeKeyDown,
+      onFocusOutside: input.onFocusOutside,
+      onInteractOutside: input.onInteractOutside,
+      onOpenChange: input.onOpenChange,
+      onPointerDownOutside: input.onPointerDownOutside,
+      open: input.open,
+      preventScroll: input.preventScroll,
+      restoreFocus: input.restoreFocus,
+      role: input.role,
+      trapFocus: input.trapFocus,
+    })
+)/>
 
-<use-machine/[machineState, send] machine=(machine)/>
+<use-machine/[machineState, send] machine=machine/>
 <const/api=dialog.connect(machineState, send, normalizeProps)/>
 
 <return=api/>
 
 <app-button ...api.triggerProps ...input.trigger>
-  <${input.trigger.renderBody}/>
+  <${input.trigger.renderBody}=[api]/>
 </app-button>
 
 <if=api.isOpen>
   <portal>
-    <div ...api.backdropProps class=styles.backdrop />
+    <div ...api.backdropProps class=styles.backdrop/>
     <div ...api.positionerProps class=styles.positioner>
       <div ...api.contentProps class=styles.content>
         <if=input.title>
-          <h2 ...api.titleProps ...input.title class=twCx(styles.title, input.title.class)>
-            <${input.title.renderBody}/>
+          <h2
+            ...api.titleProps
+            ...input.title
+            class=twCx(styles.title, input.title.class)
+          >
+            <${input.title.renderBody}=[api]/>
           </h2>
         </if>
         <if=input.description>
-          <p ...api.descriptionProps ...input.description class=twCx(styles.description, input.description.class)>
-            <${input.description.renderBody}/>
+          <p
+            ...api.descriptionProps
+            ...input.description
+            class=twCx(styles.description, input.description.class)
+          >
+            <${input.description.renderBody}=[api]/>
           </p>
         </if>
-        <${input.renderBody}/>
+        <${input.renderBody}=[api]/>
         <if=input.close>
-          <button ...api.closeTriggerProps ...input.close class=twCx(styles.close, input.close.class)>
-            <${input.close.renderBody}/>
+          <button
+            ...api.closeTriggerProps
+            ...input.close
+            class=twCx(styles.close, input.close.class)
+          >
+            <${input.close.renderBody}=[api]/>
           </button>
         </if>
       </div>
