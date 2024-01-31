@@ -6,6 +6,7 @@
   "dependencies": {
     "@marko-tags/portal": "^1.2.2",
     "@marko/tags-api-preview": "^0.7.2",
+    "@park-ui/tailwind-plugin": "^0.17.0",
     "@zag-js/accordion": "^0.31.1",
     "@zag-js/checkbox": "^0.31.1",
     "@zag-js/combobox": "^0.31.1",
