@@ -12,6 +12,7 @@ declare module "@marko/run" {
 		routes: {
 			"/": Routes["/_index"];
 			"/accordion": Routes["/accordion"];
+			"/button": Routes["/button"];
 			"/checkbox": Routes["/checkbox"];
 			"/combobox": Routes["/combobox"];
 			"/dialog": Routes["/dialog"];
@@ -35,6 +36,16 @@ declare module "../src/routes/accordion/+page.marko" {
   namespace MarkoRun {
     export { NotHandled, NotMatched, GetPaths, PostPaths, GetablePath, GetableHref, PostablePath, PostableHref, Platform };
     export type Route = Run.Routes["/accordion"];
+    export type Context = Run.MultiRouteContext<Route> & Marko.Global;
+    export type Handler = Run.HandlerLike<Route>;
+    export const route: Run.HandlerTypeFn<Route>;
+  }
+}
+
+declare module "../src/routes/button/+page.marko" {
+  namespace MarkoRun {
+    export { NotHandled, NotMatched, GetPaths, PostPaths, GetablePath, GetableHref, PostablePath, PostableHref, Platform };
+    export type Route = Run.Routes["/button"];
     export type Context = Run.MultiRouteContext<Route> & Marko.Global;
     export type Handler = Run.HandlerLike<Route>;
     export const route: Run.HandlerTypeFn<Route>;
@@ -97,7 +108,7 @@ declare module "../src/routes/+layout.marko" {
   }
   namespace MarkoRun {
     export { NotHandled, NotMatched, GetPaths, PostPaths, GetablePath, GetableHref, PostablePath, PostableHref, Platform };
-    export type Route = Run.Routes["/" | "/accordion" | "/checkbox" | "/combobox" | "/dialog" | "/menu" | "/switch"];
+    export type Route = Run.Routes["/" | "/accordion" | "/button" | "/checkbox" | "/combobox" | "/dialog" | "/menu" | "/switch"];
     export type Context = Run.MultiRouteContext<Route> & Marko.Global;
     export type Handler = Run.HandlerLike<Route>;
     export const route: Run.HandlerTypeFn<Route>;
@@ -107,6 +118,7 @@ declare module "../src/routes/+layout.marko" {
 type Routes = {
 	"/_index": { verb: "get"; meta: typeof import("../src/routes/_index/+meta.json"); };
 	"/accordion": { verb: "get"; };
+	"/button": { verb: "get"; };
 	"/checkbox": { verb: "get"; };
 	"/combobox": { verb: "get"; };
 	"/dialog": { verb: "get"; };

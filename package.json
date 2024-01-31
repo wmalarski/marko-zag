@@ -7,22 +7,22 @@
     "@marko-tags/portal": "^1.2.2",
     "@marko/tags-api-preview": "^0.7.2",
     "@park-ui/tailwind-plugin": "^0.17.0",
-    "@zag-js/accordion": "^0.31.1",
-    "@zag-js/checkbox": "^0.31.1",
-    "@zag-js/combobox": "^0.31.1",
-    "@zag-js/dialog": "^0.31.1",
-    "@zag-js/menu": "^0.31.1",
-    "@zag-js/switch": "^0.31.1",
+    "@zag-js/accordion": "^0.34.0",
+    "@zag-js/checkbox": "^0.34.0",
+    "@zag-js/combobox": "^0.34.0",
+    "@zag-js/dialog": "^0.34.0",
+    "@zag-js/menu": "^0.34.0",
+    "@zag-js/switch": "^0.34.0",
     "class-variance-authority": "^0.7.0",
-    "marko": "^5.32.0",
-    "tailwind-merge": "^2.1.0"
+    "marko": "^5.32.7",
+    "tailwind-merge": "^2.2.1"
   },
   "devDependencies": {
-    "@marko/run": "^0.4.0",
-    "autoprefixer": "^10.4.16",
-    "daisyui": "^4.4.19",
-    "postcss": "^8.4.32",
-    "tailwindcss": "^3.3.6"
+    "@marko/run": "^0.4.2",
+    "autoprefixer": "^10.4.17",
+    "daisyui": "^4.6.1",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1"
   },
   "private": true,
   "scripts": {

@@ -1,3 +1,5 @@
+@import "../../node_modules/@park-ui/tailwind-plugin/preset.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
