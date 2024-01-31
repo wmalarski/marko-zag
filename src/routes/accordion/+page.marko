@@ -7,28 +7,34 @@
           <const/selectedClass=(
             ref.value.includes("Watercraft") ? "underline" : ""
           )/>
-          <div class=["font-semibold", selectedClass]>
-            Watercraft
+          <div class="flex gap-2">
+            <div class=["font-semibold", selectedClass]>
+              Watercraft
+            </div>
+            <div>Yacht, Boats and Dinghies</div>
           </div>
-          <div>Yacht, Boats and Dinghies</div>
         </@trigger>
         <@content>Sample accordion content</@content>
       </@item>
       <@item value="Automobiles">
         <@trigger>
-          <div class="font-semibold">
-            Automobiles
+          <div class="flex gap-2">
+            <div class="font-semibold">
+              Automobiles
+            </div>
+            <div>Cars, Trucks and Vans</div>
           </div>
-          <div>Cars, Trucks and Vans</div>
         </@trigger>
         <@content>Sample accordion content</@content>
       </@item>
       <@item value="Aircrafts">
         <@trigger>
-          <div class="font-semibold">
-            Aircrafts
+          <div class="flex gap-2">
+            <div class="font-semibold">
+              Aircrafts
+            </div>
+            <div>Airplanes, Helicopters and Rockets</div>
           </div>
-          <div>Airplanes, Helicopters and Rockets</div>
         </@trigger>
         <@content>Sample accordion content</@content>
       </@item>

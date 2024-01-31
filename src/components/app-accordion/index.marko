@@ -1,5 +1,6 @@
 import * as accordion from "@zag-js/accordion";
 import { normalizeProps } from "../normalize-props";
+import { accordionClasses } from "./recipes";
 export type Input = (accordion.Context & {
   item: Marko.RepeatableAttrTag<Marko.Input<"div"> & accordion.ItemProps & {
     trigger: Marko.AttrTag<Omit<Marko.Input<"button">, 'renderBody'> & {
@@ -30,30 +31,27 @@ export type Input = (accordion.Context & {
 
 <use-machine/[machineState, send] machine=machine/>
 <const/api=accordion.connect(machineState, send, normalizeProps)/>
+<const/styles=accordionClasses()/>
 
 <return=api/>
 
-<div ...api.rootProps>
+<div ...api.rootProps class=styles.root>
   <for|item| of=input.item>
     <const/{ value, disabled, trigger, content, ...rest }=item/>
-    <div
-      class="border text-sm bg-base-300"
-      ...api.getItemProps({ value, disabled })
-      ...rest
-    >
+    <div ...api.getItemProps({ value, disabled }) ...rest class=styles.item>
       <h3>
         <button
-          class="w-full py-2 px-3 text-start cursor-pointer"
           ...api.getItemTriggerProps({ value, disabled })
           ...item.trigger
+          class=styles.itemTrigger
         >
           <${item.trigger.renderBody}=[api]/>
         </button>
       </h3>
       <div
-        class="w-full py-2 px-3"
         ...api.getItemContentProps({ value, disabled })
         ...item.content
+        class=styles.itemContent
       >
         <${item.content.renderBody}=[api]/>
       </div>
